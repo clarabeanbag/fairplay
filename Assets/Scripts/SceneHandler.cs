@@ -21,4 +21,14 @@ public class SceneHandler : MonoBehaviour
         Application.Quit();
     }
 
+    public void openPauseMenu()
+    {
+
+    }
+
+    public void resume()
+    {
+
+    }
+
 }
