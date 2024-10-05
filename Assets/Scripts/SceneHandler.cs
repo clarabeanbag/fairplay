@@ -21,6 +21,7 @@ public class SceneHandler : MonoBehaviour
         Application.Quit();
     }
 
+<<<<<<< Updated upstream
     public void openPauseMenu()
     {
 
@@ -31,4 +32,6 @@ public class SceneHandler : MonoBehaviour
 
     }
 
+=======
+>>>>>>> Stashed changes
 }
