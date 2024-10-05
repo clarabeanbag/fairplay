@@ -20,18 +20,4 @@ public class SceneHandler : MonoBehaviour
     {
         Application.Quit();
     }
-
-<<<<<<< Updated upstream
-    public void openPauseMenu()
-    {
-
-    }
-
-    public void resume()
-    {
-
-    }
-
-=======
->>>>>>> Stashed changes
 }

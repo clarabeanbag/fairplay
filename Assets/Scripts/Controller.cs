@@ -45,8 +45,12 @@ public class Controller : MonoBehaviour
 
     private void Build()
     {
-        GameObject builtHouse = Instantiate(housePrefab, nextHouse.transform);
-        nextHouse = Instantiate(housePrefab);
-
+        if (nextHouse.transform.GetChild(0).GetComponent<House>().IsBuildable())
+        {
+            GameObject builtHouse = Instantiate(housePrefab, nextHouse.transform.position, Quaternion.identity);
+            Destroy(nextHouse);
+            builtHouse.transform.GetChild(0).GetComponent<House>().HouseIsBuilt();
+            nextHouse = Instantiate(housePrefab);
+        }
     }
 }
