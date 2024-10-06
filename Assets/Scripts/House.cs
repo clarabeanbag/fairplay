@@ -15,11 +15,15 @@ public class House : MonoBehaviour
 
     private int spriteNum = 0;
 
+    private int baseValue = 10; 
+    private int finalValue = 0;
+
     private SpriteRenderer sr;
 
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        finalValue = baseValue;
     }
 
     void Update()
@@ -30,6 +34,7 @@ public class House : MonoBehaviour
     {
         spriteNum = Random.Range(0, 4);
         sr.sprite = spritesBefore[spriteNum];
+        CalculateBaseValue();
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -65,6 +70,7 @@ public class House : MonoBehaviour
         {
             built = true;
             Circle.SetActive(false);
+            //ScoreManager.instance.CalculateScore(baseValue);
         }
     }
 
@@ -77,4 +83,17 @@ public class House : MonoBehaviour
     public bool IsBuildable() { return buildable; }
 
     public int GetSpriteNum() { return spriteNum; }
+
+    private void CalculateBaseValue()
+    {
+        baseValue += (baseValue / 2) * spriteNum;
+    }
+
+    public void CalculateFinalValue(bool within,int bonus)
+    {
+        if(within)
+            finalValue += bonus;
+        else 
+            finalValue -= bonus;
+    }
 }

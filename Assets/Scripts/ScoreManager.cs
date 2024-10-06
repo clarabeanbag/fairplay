@@ -2,24 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
 
-    public Text scoreText;
+    public static ScoreManager instance;
+
+    public TMP_Text scoreText;
 
     int score = 0;
-    int totalScore = 0;
+    int totalScore = 50;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        scoreText.text = score.ToString();
+        scoreText.text = score.ToString() + "/" + totalScore.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CalculateScore(int deltaScore)
     {
-        
+        score += deltaScore; 
+        scoreText.text = score.ToString() + "/" + totalScore.ToString();      
+    } 
+
+    public void SetTotalScore(int lvlscore)
+    {
+        totalScore = lvlscore;
     }
 }
