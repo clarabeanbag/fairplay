@@ -22,13 +22,13 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scoreText.text = score.ToString() + "/" + totalScore.ToString();
+        scoreText.text = score.ToString();
     }
 
     public void CalculateScore(int deltaScore)
     {
         score += deltaScore; 
-        scoreText.text = score.ToString() + "/" + totalScore.ToString();      
+        scoreText.text = score.ToString();      
     } 
 
     public void SetTotalScore(int lvlscore)
