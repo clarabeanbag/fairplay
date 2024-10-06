@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Tooltip : MonoBehaviour
 {
-    public string message;
+    public string[] messages;
 
     private void OnMouseEnter()
     {
-        TooltipManager._instance.SetShowTooltip(message);
+        TooltipManager._instance.SetShowTooltip(messages[Random.Range(0, 3)]);
     }
 
     private void OnMouseExit()
