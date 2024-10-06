@@ -31,10 +31,12 @@ public class TooltipManager : MonoBehaviour
     void Update()
     {
         transform.position = Input.mousePosition;
+        //transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     public void SetShowTooltip(string message)
     {
+        gameObject.SetActive(true);
         tooltipText.text = message;
         print("show tooltip");
     }

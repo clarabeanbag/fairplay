@@ -35,6 +35,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseUnpause"",
+                    ""type"": ""Button"",
+                    ""id"": ""f2b20a1c-c710-4299-918a-4de4624da3fc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +57,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""Build"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf6b6e0b-74ac-49b1-8d38-f54b7a1c3ce1"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseUnpause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +77,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         // Main
         m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
         m_Main_Build = m_Main.FindAction("Build", throwIfNotFound: true);
+        m_Main_PauseUnpause = m_Main.FindAction("PauseUnpause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -119,11 +140,13 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Main;
     private List<IMainActions> m_MainActionsCallbackInterfaces = new List<IMainActions>();
     private readonly InputAction m_Main_Build;
+    private readonly InputAction m_Main_PauseUnpause;
     public struct MainActions
     {
         private @PlayerActions m_Wrapper;
         public MainActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Build => m_Wrapper.m_Main_Build;
+        public InputAction @PauseUnpause => m_Wrapper.m_Main_PauseUnpause;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -136,6 +159,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Build.started += instance.OnBuild;
             @Build.performed += instance.OnBuild;
             @Build.canceled += instance.OnBuild;
+            @PauseUnpause.started += instance.OnPauseUnpause;
+            @PauseUnpause.performed += instance.OnPauseUnpause;
+            @PauseUnpause.canceled += instance.OnPauseUnpause;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -143,6 +169,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Build.started -= instance.OnBuild;
             @Build.performed -= instance.OnBuild;
             @Build.canceled -= instance.OnBuild;
+            @PauseUnpause.started -= instance.OnPauseUnpause;
+            @PauseUnpause.performed -= instance.OnPauseUnpause;
+            @PauseUnpause.canceled -= instance.OnPauseUnpause;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -163,5 +192,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     public interface IMainActions
     {
         void OnBuild(InputAction.CallbackContext context);
+        void OnPauseUnpause(InputAction.CallbackContext context);
     }
 }

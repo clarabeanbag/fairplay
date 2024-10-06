@@ -8,7 +8,7 @@ public class SceneHandler : MonoBehaviour
 
     public void loadMain()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Main");
     }
 
     public void loadMenu()
@@ -20,4 +20,10 @@ public class SceneHandler : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void closeInstructions()
+    {
+
+    }
+
 }

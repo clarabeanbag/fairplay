@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 8529089049327534219}
   - component: {fileID: 5072190356275822307}
   - component: {fileID: 9183232098771431501}
+  - component: {fileID: 1754566144771076158}
   m_Layer: 0
   m_Name: house
   m_TagString: House
@@ -348,3 +349,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &1754566144771076158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5256157477763919939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea1411434456b747975bdbde2a679e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Middleclass
