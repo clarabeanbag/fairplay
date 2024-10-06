@@ -6,11 +6,13 @@ public class Controller : MonoBehaviour
 {
     private PlayerActions playerActions;
 
-    public GameObject housePrefab;
+    public GameObject[] housePrefabs;
 
     private GameObject nextHouse;
     private Vector3 currentPosition;
     private float speed = 1f;
+
+    private int currentHouseType = 0;
 
     private void Awake()
     {
@@ -30,13 +32,15 @@ public class Controller : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         playerActions.Main.Build.performed += _ => Build();
-        nextHouse = Instantiate(housePrefab);
+        currentHouseType = Random.Range(0, 4);
+        nextHouse = Instantiate(housePrefabs[currentHouseType]);
     }
 
-    // Update is called once per frame
     void Update()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         currentPosition = Input.mousePosition;
         currentPosition.z = speed;
         nextHouse.transform.position = Camera.main.ScreenToWorldPoint(currentPosition);
@@ -47,10 +51,12 @@ public class Controller : MonoBehaviour
     {
         if (nextHouse.transform.GetChild(0).GetComponent<House>().IsBuildable())
         {
-            GameObject builtHouse = Instantiate(housePrefab, nextHouse.transform.position, Quaternion.identity);
+            GameObject builtHouse = Instantiate(nextHouse, nextHouse.transform.position, Quaternion.identity);
+            builtHouse.transform.GetChild(0).GetComponent<House>().SetSpriteNum(nextHouse.transform.GetChild(0).GetComponent<House>().GetSpriteNum());
             Destroy(nextHouse);
             builtHouse.transform.GetChild(0).GetComponent<House>().HouseIsBuilt();
-            nextHouse = Instantiate(housePrefab);
+            currentHouseType = Random.Range(0, 4);
+            nextHouse = Instantiate(housePrefabs[currentHouseType]);
         }
     }
 }

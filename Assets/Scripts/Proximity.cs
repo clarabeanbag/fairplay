@@ -18,16 +18,16 @@ public class Proximity : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("hey");
+        // Debug.Log("Points update");
     }
 
     void OnTriggerStay2D(Collider2D col)
     {
-        Debug.Log("ho");
+        // Debug.Log("Points update");
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
-        Debug.Log("lets go");
+        // Debug.Log("Points update");
     }
 }

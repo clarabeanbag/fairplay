@@ -1,24 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.InputSystem.DefaultInputActions;
 
 public class House : MonoBehaviour
 {
+    public Sprite[] spritesBefore;
+    public Sprite[] spritesAfter;
+
     public GameObject Circle;
 
     private bool built = false;
     private bool buildable = true;
 
-    // Start is called before the first frame update
-    void Start()
+    private int spriteNum = 0;
+
+    private SpriteRenderer sr;
+
+    void Awake()
     {
-        
+        sr = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+    }
+
+    private void OnEnable()
+    {
+        spriteNum = Random.Range(0, 4);
+        sr.sprite = spritesBefore[spriteNum];
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -57,5 +68,13 @@ public class House : MonoBehaviour
         }
     }
 
+    public void SetSpriteNum(int sn)
+    {
+        spriteNum = sn;
+        sr.sprite = spritesBefore[spriteNum];
+    }
+
     public bool IsBuildable() { return buildable; }
+
+    public int GetSpriteNum() { return spriteNum; }
 }
