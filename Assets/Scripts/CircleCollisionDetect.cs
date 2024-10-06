@@ -6,10 +6,16 @@ public class CircleCollisionDetect : MonoBehaviour
 {
 
     int value;
+
+    private int parentSpriteNum;
+
+    public House parentHouse;
     // Start is called before the first frame update
     void Start()
     {
-        
+        parentHouse = transform.parent.GetChild(0).GetComponent<House>();
+        parentSpriteNum = parentHouse.GetSpriteNum();
+        Debug.Log(parentSpriteNum);
     }
 
     // Update is called once per frame
@@ -23,8 +29,9 @@ public class CircleCollisionDetect : MonoBehaviour
          if (col.gameObject.tag == "House")
          {
             value = col.gameObject.GetComponent<House>().GetSpriteNum();
-            this.transform.parent.gameObject.GetComponent<House>().CalculateFinalValue(true, value );
+            parentHouse.CalculateFinalValue(true, CalculateAreaEffectValue(parentSpriteNum, value) );
          }
+         Debug.Log("current house value: " + parentHouse.GetFinalValue());
     }
 
     void OnTriggerExit2D(Collider2D col)
@@ -32,7 +39,14 @@ public class CircleCollisionDetect : MonoBehaviour
          if (col.gameObject.tag == "House")
          {
             value = col.gameObject.GetComponent<House>().GetSpriteNum();
-            this.transform.parent.gameObject.GetComponent<House>().CalculateFinalValue(false, value );
+            parentHouse.CalculateFinalValue(false, CalculateAreaEffectValue(parentSpriteNum, value) );
          }
+         Debug.Log("current house value: " + parentHouse.GetFinalValue());
+    }
+
+    int CalculateAreaEffectValue(int a, int b){
+        if((a < b) || (a > b))
+            return a - b;
+        else return a;
     }
 }
