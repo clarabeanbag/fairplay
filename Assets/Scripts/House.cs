@@ -28,6 +28,10 @@ public class House : MonoBehaviour
 
     void Update()
     {
+        if (Controller.gameOver == true)
+        {
+            sr.sprite = spritesAfter[spriteNum];
+        }
     }
 
     private void OnEnable()

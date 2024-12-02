@@ -29,7 +29,7 @@ public class CircleCollisionDetect : MonoBehaviour
          if (col.gameObject.tag == "House")
          {
             value = col.gameObject.GetComponent<House>().GetSpriteNum();
-            parentHouse.CalculateFinalValue(true, CalculateAreaEffectValue(parentSpriteNum, value) );
+            parentHouse.CalculateFinalValue(true, CalculateAreaEffectValue(parentSpriteNum, value));
          }
          Debug.Log("current house value: " + parentHouse.GetFinalValue());
     }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.TextCore.Text;
 
 public class Controller : MonoBehaviour
 {
@@ -14,11 +16,26 @@ public class Controller : MonoBehaviour
 
     private int currentHouseType = 0;
 
+    public TextMeshProUGUI housesleftText;
+
     //Pause Menu
     private bool pauseMenuOpen = false;
     public GameObject pauseMenu;
 
     private bool instructionsMenuOpen = false;
+
+    private int housesLeft = 20;
+
+    public GameObject tooltipCanvas;
+
+    public AudioSource bgmusic;
+    public AudioSource cityambience;
+    public AudioSource buildsound;
+
+    public SpriteRenderer bgSr;
+    public Sprite afterBg;
+
+    public static bool gameOver = false;
 
     private void Awake()
     {
@@ -38,6 +55,9 @@ public class Controller : MonoBehaviour
 
     void Start()
     {
+        instructionsMenuOpen = true;
+        tooltipCanvas.SetActive(false);
+        housesLeft = 20;
         Cursor.lockState = CursorLockMode.Confined;
         playerActions.Main.Build.performed += _ => Build();
         playerActions.Main.PauseUnpause.performed += _ => PauseUnpause();
@@ -47,7 +67,7 @@ public class Controller : MonoBehaviour
 
     void Update()
     {
-        if ((!pauseMenuOpen))
+        if ((!pauseMenuOpen) && !instructionsMenuOpen && housesLeft > 0)
         {
             Cursor.lockState = CursorLockMode.Confined;
             currentPosition = Input.mousePosition;
@@ -60,7 +80,7 @@ public class Controller : MonoBehaviour
     private void Build()
     {
 
-        if ((!pauseMenuOpen))
+        if ((!pauseMenuOpen) && housesLeft > 0)
         {
             if (nextHouse.transform.GetChild(0).GetComponent<House>().IsBuildable())
             {
@@ -68,8 +88,23 @@ public class Controller : MonoBehaviour
                 builtHouse.transform.GetChild(0).GetComponent<House>().SetSpriteNum(nextHouse.transform.GetChild(0).GetComponent<House>().GetSpriteNum());
                 Destroy(nextHouse);
                 builtHouse.transform.GetChild(0).GetComponent<House>().HouseIsBuilt();
-                currentHouseType = Random.Range(0, 4);
-                nextHouse = Instantiate(housePrefabs[currentHouseType]);
+                buildsound.Play();
+
+                housesLeft -= 1;
+                housesleftText.text = housesLeft.ToString();
+                if (housesLeft == 0)
+                {
+                    gameOver = true;
+                    tooltipCanvas.SetActive(true);
+                    bgmusic.Stop();
+                    cityambience.Play();
+                    bgSr.sprite = afterBg;
+                }
+                else
+                {
+                    currentHouseType = Random.Range(0, 4);
+                    nextHouse = Instantiate(housePrefabs[currentHouseType]);
+                }
             }
         }
     }
@@ -86,5 +121,10 @@ public class Controller : MonoBehaviour
             pauseMenu.SetActive(true);
             pauseMenuOpen = true;
         }
+    }
+
+    public void closeInstructions()
+    {
+        instructionsMenuOpen = false;
     }
 }

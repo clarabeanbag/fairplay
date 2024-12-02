@@ -361,4 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea1411434456b747975bdbde2a679e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: homeless
+  messages:
+  - Mahira keeps her hijab at home when she goes for a job interview
+  - Miguel cannot go home because his visa expired.
+  - Chima could not go to the hospital when he got the flu.
+  - Wei could not call his family ever since he arrived in the country.

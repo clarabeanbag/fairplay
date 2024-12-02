@@ -361,4 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea1411434456b747975bdbde2a679e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: Middleclass
+  messages:
+  - 'Bob lives nicely as an executive at a stable train company. '
+  - 'The Clients have bought a new TV recently. '
+  - 'Mike often complains about his eight to four job at the dinner table. '
+  - "The Johnsons are irked about inflation (they can\u2019t buy coffee anymore). "

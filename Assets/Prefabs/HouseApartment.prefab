@@ -361,4 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea1411434456b747975bdbde2a679e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: apartment
+  messages:
+  - Aamadu was the only one in his family who managed to move here, so he lives alone.
+  - Hannah has been told to be careful before moving here.
+  - Natalie needed a recommendation letter to get a room in this complex.
+  - "The police have been called on the Nowaks twice because of \u201Cthe noisy toddler\u201D."
